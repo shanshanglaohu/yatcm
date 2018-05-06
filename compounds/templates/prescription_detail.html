@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load staticfiles static i18n %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" id="prescription_info">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title"><h3 class="text-center"><strong>{{ prescription.chinese_name }}</strong></h3></div>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>中文名：</strong>{{ prescription.chinese_name }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>英文名： </strong>{{ prescription.english_name }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>配方组成：</strong>{{ prescription.zucheng }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>方解:</strong>{{ prescription.fangjie }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>使用方法：</strong>{{ prescription.yongfa }}
+                        </li>
+
+                        <li class="list-group-item">
+                            <strong>传统用法：</strong>{{ prescription.tradition_usage }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>现代用法： </strong>{{ prescription.modern_usage }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Modern Usage:</strong>{{ prescription.modern_usage_en }}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12" id="related_prescription">
+                    <ul class="list-group">
+
+                        {% if prescription.main_prescription %}
+                            <li class="list-group-item list-group-item-success"><h4>主方</h4></li>
+                            <li class="list-group-item">
+                                <a href="{% url 'prescription_detail' prescription.main_prescription_id %}">
+                                    {{prescription.main_prescription.chinese_name }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item list-group-item-success"><h4>副方</h4></li>
+                            {% for pre in prescription.prescription_set.all %}
+                                <li class="list-group-item">
+                                    <a href="{{ pre.get_absolute_url }}">
+                                        {{ pre.chinese_name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>  <!-- related prescription -->
+
+                <div id="related_herb" class="col-md-12">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success"><h4>中药成分</h4></li>
+                        {% for herb in prescription.herbs.all %}
+                            <li class="list-group-item">
+                                <a href="{{ herb.get_absolute_url }}">{{ herb.chinese_name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

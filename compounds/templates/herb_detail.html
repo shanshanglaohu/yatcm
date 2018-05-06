@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load staticfiles static i18n %}
+{% block css %}
+
+{% endblock css %}
+
+{% block content %}
+
+    <!-- herb information -->
+    <div class="container">
+        <div class="row">
+            <h4>{{ herb.name }}</h4>
+            <div id="herb_image" class="col-md-4">
+                <a href="{{ herb.wiki_link }}">
+                    <img class="img-responsive" src="{{ herb.image_url }}" alt="{{ herb.chinese_name }} image">
+                    <span>{{ herb.name }}</span>
+                </a>
+            </div>
+            <div id="herb_info" class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ herb.name }}</div>
+                    <div class="panel-body"><p>{{ herb.describe }}</p></div>
+
+                    <!-- list group -->
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            Chinese name: {{ herb.chinese_name }}
+                        </li>
+                        <li class="list-group-item">
+                            phonetic name: {{ herb.phonetic_name }}
+                        </li>
+                        <li class="list-group-item">
+                            medicinal part: {{ herb.medicinal_part }}
+                        </li>
+                        <li class="list-group-item">
+                            link:
+                            <a href="{{ herb.wiki_link }}">wiki</a>&nbsp;
+                            <a href="{{ herb.wiki_chinese }}">维基</a>
+                        </li>
+                        {% if taxonomy_list %}
+                            <li class="list-group-item">
+                            taxonomy:
+                                {% for taxononmy in taxonomy_list %}
+                                    <a href="{{ taxonomy.ncbi_link }}">-->{{ taxononmy.name }}</a>
+                                {% endfor %}
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- herb ingredient -->
+    <div id="ingredient">
+    <hr>
+    <h4>Ingredients</h4>
+    <table class="table table-responsive">
+        <tr>
+            <th style="width: 33%">Ingredients</th>
+            <td><a href="{% url "herb_related_compounds" herb.pk %}">{{ herb.compounds.count}} records</a></td>
+        </tr>
+    </table>
+    </div>
+
+    <div id="herb_related_prescription">
+        <h4>Prescriptions</h4>
+        <table class="table table-responsive">
+            <tr>
+                <th style="width: 33%">Prescriptions</th>
+                <td><a href="{% url 'herb_related_prescription' herb.pk %}">{{ herb.prescription_set.count}} records</a></td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock content%}
+
+{% block js %}
+
+{% endblock js %}

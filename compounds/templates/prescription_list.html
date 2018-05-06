@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static staticfiles i18n %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div id="Prescription_list" class="panel panel-default">
+{#                <div class="panel-heading">#}
+{#                    <div class="panel-title">#}
+{#                        <h3>{{ herb.chinese_name }}</h3>#}
+{#                    </div>#}
+{#                </div>#}
+                <ul class="list-group">
+                    {% for prescription in prescriptions %}
+                        <li class="list-group-item list-group-item-info">
+                            <a href="{{ prescription.get_absolute_url }}">【{{ prescription.chinese_name }}】：</a>
+                        </li>
+                        <li class="list-group-item">
+                            {{ prescription.zucheng }}
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+{#    {% if is_paginated %}#}
+{#        <div class="pagination">#}
+{#            <span class="page-links">#}
+{#                {% if page_obj.has_previous %}#}
+{#                    <a class="btn btn-default" href="/yatcm/structure/all?page={{ page_obj.previous_page_number }}">previous</a>#}
+{#                {% endif %}#}
+{#                <span class="page-current">#}
+{#                    Page {{ structures.number }} of {{ page_obj.paginator.num_pages }}#}
+{#                </span>#}
+{#                {% if page_obj.has_next %}#}
+{#                    <a class="btn btn-default"#}
+{#                       href="/yatcm/structure/all?page={{ page_obj.next_page_number }}">next</a>#}
+{#                {% endif %}#}
+{#            </span>#}
+{#        </div>#}
+{#    {% endif %}#}
+{% endblock content %}
+{% block js %}
+{% endblock js %}

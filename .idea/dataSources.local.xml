@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - yatcm@localhost" uuid="292de5bf-3424-4824-9369-329b68d7f8f9">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <user-name>jianping</user-name>
+      <introspection-schemas>yatcm:public</introspection-schemas>
+    </data-source>
+  </component>
+</project>
